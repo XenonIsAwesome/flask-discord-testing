@@ -2,9 +2,9 @@ import os
 from typing import Dict, Union, Optional
 import requests as requests
 
-from commands.command import Command
-from commands.test import TestCommand
-from commands.translate import TranslateCommand
+from discord_types.commands.command import Command
+from discord_types.commands.test import TestCommand
+from discord_types.commands.translate import TranslateCommand
 
 CommandsDict = Dict[str, Command]
 
@@ -27,6 +27,8 @@ def register_command(name: str) -> Dict[str, dict]:
         if os.getenv('GUILD_ID'):
             url += f"guilds/{os.getenv('GUILD_ID')}/"
         url += "commands"
+
+        print(url)
 
         headers = {
             "User-Agent": "DiscordBot (Xenon, 0.1)",
@@ -67,7 +69,7 @@ def remove_command(name: str) -> Dict[str, bool]:
         cmd_json = None
 
         for cmd_json in response.json():
-            if cmd_json['name'] == command.name:
+            if type(cmd_json) == dict and  cmd_json.get('name') == command.name:
                 break
             cmd_json = None
 
@@ -103,10 +105,9 @@ def get_command(name: str) -> Dict[str, Optional[dict]]:
         response = requests.get(url, headers=headers)
 
         for cmd_json in response.json():
-            if cmd_json['name'] == command.name:
+            if type(cmd_json) == dict and cmd_json.get('name') == command.name:
                 return cmd_json
-        else:
-            return None
+        return None
 
     cmd = CommandFactory(name)
     if type(cmd) is dict:

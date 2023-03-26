@@ -17,6 +17,7 @@ def index():
 @app.route('/interactions', methods=['POST'])
 @verify_key_decorator(os.getenv('PUBLIC_KEY'))
 def interactions_router():
+    print(request.json)
     # SLASH COMMAND CASE
     if request.json['type'] == InteractionType.APPLICATION_COMMAND:
         cmd = CommandFactory(request.json['data']['name'])

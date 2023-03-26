@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from discord_interactions import InteractionResponseType, InteractionResponseFlags
-from commands.command import Command
+from discord_types.commands.command import Command
 from utils.discord_enums import ApplicationCommandTypes
 
 
