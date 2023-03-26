@@ -8,7 +8,7 @@ from utils.discord_enums import ApplicationCommandTypes
 
 @dataclass
 class TranslateCommand(Command):
-    name: str = 'translate'
+    name: str = 'Translate'
     description: str = ""
     type: ApplicationCommandTypes = ApplicationCommandTypes.MESSAGE
 
