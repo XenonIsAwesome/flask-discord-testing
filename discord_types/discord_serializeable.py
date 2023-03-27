@@ -1,22 +1,31 @@
 class DiscordSerializable:
+    @staticmethod
+    def __serialize(dir_data: dict):
+        for key, value in dir_data.items():
+            if '__' in key:
+                continue
+
+            if type(value) is list:
+                dir_data[key] = [
+                    DiscordSerializable.__serialize(x)
+                    if type(x) is DiscordSerializable else x
+                    for x in value
+                ]
+                continue
+
+            if type(value) is dict:
+                dir_data[key] = {
+                    k: DiscordSerializable.__serialize(v)
+                    if type(v) is DiscordSerializable else v
+                    for k, v in value.items()
+                }
+                continue
+
+            if type(value) not in [int, str, float, bool]:
+                continue
+
+            dir_data[key] = value
+
+        return dir_data
     def json(self):
-        # TODO: FIXXXXXXXXXXX
-        json_data = {}
-
-        for attr_key in dir(self):
-            attr_val = getattr(self, attr_key)
-
-            if '__' in attr_key:
-                continue
-            if type(attr_val) == list:
-                json_data[attr_key] = [x.json() if getattr(x, 'json') else x for x in attr_val]
-                continue
-            if type(attr_val) == dict:
-                json_data[attr_key] = {k: v.json() if getattr(v, 'json') else v for k, v in attr_val.items()}
-                continue
-            if type(attr_val) not in [int, str, float, bool]:
-                continue
-
-            json_data[attr_key] = attr_val
-
-        return json_data
+        return self.__serialize({attr: getattr(self, attr) for attr in dir(self)})
