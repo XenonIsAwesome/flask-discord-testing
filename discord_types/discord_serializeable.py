@@ -27,5 +27,6 @@ class DiscordSerializable:
             dir_data[key] = value
 
         return dir_data
+
     def json(self):
         return self.__serialize({attr: getattr(self, attr) for attr in dir(self)})
