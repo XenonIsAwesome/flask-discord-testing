@@ -1,17 +1,17 @@
 from typing import List
 
-from discord_types.components.discord_component import DiscordComponent
+from discord_types.components.discord_component import Component
 from discord_types.components.select_menu import StringSelect
 from discord_types.components.text_input import TextInput
-from discord_types.modals.modal import DiscordModal
-from utils.discord_enums import TextInputStyles, SelectMenuTypes
+from discord_types.modals.modal import Modal
+from utils.discord_utils.discord_enums import TextInputStyles, SelectMenuTypes
 
 
-class TranslateRequest(DiscordModal):
+class TranslateRequest(Modal):
     def __init__(self, message_content):
         self.custom_id: str = 'translate_modal'
         self.title: str = 'Translate'
-        self.components: List[DiscordComponent] = [
+        self.components: List[Component] = [
             StringSelect(
                 type=SelectMenuTypes.TEXT,
                 custom_id='translate_modal_lang_select',

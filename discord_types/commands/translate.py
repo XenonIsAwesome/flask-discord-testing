@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from discord_interactions import InteractionResponseType, InteractionResponseFlags
+from discord_interactions import InteractionResponseType
 
 from discord_types.commands.command import Command
 from discord_types.modals.translate_request import TranslateRequest
-from utils.discord_enums import ApplicationCommandTypes
+from utils.discord_utils.discord_enums import ApplicationCommandTypes
 
 
 @dataclass

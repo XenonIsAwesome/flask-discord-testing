@@ -1,9 +1,6 @@
-from abc import abstractmethod, ABC
-from dataclasses import dataclass
-
 from discord_interactions import InteractionType
-from utils.discord_enums import ApplicationCommandTypes
-from discord_types.discord_request import DiscordInteraction
+from utils.discord_utils.discord_enums import ApplicationCommandTypes
+from discord_types.discord_interaction import DiscordInteraction
 
 
 # @dataclass

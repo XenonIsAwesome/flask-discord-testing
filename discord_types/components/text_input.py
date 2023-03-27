@@ -1,12 +1,11 @@
-from dataclasses import dataclass
 from typing import Optional
 
-from discord_types.components.discord_component import DiscordComponent
-from utils.discord_enums import DiscordComponentTypes, TextInputStyles
+from discord_types.components.discord_component import Component
+from utils.discord_utils.discord_enums import DiscordComponentTypes, TextInputStyles
 
 
 # @dataclass
-class TextInput(DiscordComponent):
+class TextInput(Component):
     def __init__(
         self, custom_id: str, style: TextInputStyles,
         label: str, min_length: int = None,

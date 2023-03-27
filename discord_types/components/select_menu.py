@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 from typing import Union, List, Optional, Dict
 
-from discord_types.components.discord_component import DiscordComponent
-from utils.discord_enums import SelectMenuTypes
+from discord_types.components.discord_component import Component
+from utils.discord_utils.discord_enums import SelectMenuTypes
 
 SelectOption = Union[Dict]
 
 
 @dataclass
-class SelectMenu(DiscordComponent):
+class SelectMenu(Component):
     type: SelectMenuTypes
     custom_id: str
 

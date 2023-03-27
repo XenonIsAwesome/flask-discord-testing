@@ -3,8 +3,7 @@ import os
 from flask import Flask, request, jsonify
 
 from discord_interactions import verify_key_decorator, InteractionType, InteractionResponseType
-
-from utils.command_utils import register_command, remove_command, CommandFactory, get_command
+from utils.discord_utils.command_utils import register_command, remove_command, CommandFactory, get_command
 
 app = Flask(__name__)
 
