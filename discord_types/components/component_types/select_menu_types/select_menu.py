@@ -1,10 +1,10 @@
 from typing import Union, List, Optional, Dict
 
-from discord_types.interactions.components.component import Component
-from utils.discord_utils.discord_enums import SelectMenuTypes, DiscordComponentTypes
+from discord_types.components.component import Component
+from discord_types.components.component_types.select_menu_types.select_option import SelectOption
+from utils.discord_utils.discord_enums import SelectMenuType, ComponentType
 
-SelectOption = Union[Dict]
-SelectComponent = Union[DiscordComponentTypes, SelectMenuTypes]
+SelectComponent = Union[ComponentType, SelectMenuType]
 
 
 class SelectMenu(Component):

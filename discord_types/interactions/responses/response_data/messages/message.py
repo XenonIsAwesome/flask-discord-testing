@@ -2,8 +2,8 @@
 from typing import Optional, List
 
 from discord_interactions import InteractionResponseType, InteractionResponseFlags
-from discord_types.interactions.components.component import Component
-from discord_types.responses.response_data.response_data import ResponseData
+from discord_types.components.component import Component
+from discord_types.interactions.responses.response_data.response_data import ResponseData
 
 # MessageType = Union[
 #     InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,

@@ -3,6 +3,8 @@ from typing import Dict, Optional
 
 import requests as requests
 
+from bot.custom_commands.command_factory import CommandFactory
+
 
 def construct_base_url():
     url = f"https://discord.com/api/v10/applications/{os.getenv('APP_ID')}/"

@@ -1,9 +1,7 @@
-from abc import ABC
-
 from discord_interactions import InteractionResponseType
 
-from discord_types.responses.response_data.response_data import ResponseData
-from utils.serializeable import Serializable
+from discord_types.interactions.responses.response_data.response_data import ResponseData
+from utils.serializable import Serializable
 
 
 class DiscordResponse(Serializable):

@@ -1,7 +1,7 @@
 from typing import Callable
 
-from discord_types.responses.interaction_response import DiscordResponse
-from discord_types.responses.response_data.response_data import ResponseData
+from discord_types.interactions.responses.interaction_response import DiscordResponse
+from discord_types.interactions.responses.response_data.response_data import ResponseData
 
 
 def discord_response(func: Callable[[dict], ResponseData]):

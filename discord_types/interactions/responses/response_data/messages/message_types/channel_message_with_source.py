@@ -2,8 +2,8 @@ from typing import Optional, List
 
 from discord_interactions import InteractionResponseType, InteractionResponseFlags
 
-from discord_types.interactions.components.component import Component
-from discord_types.responses.response_data.messages.message import Message
+from discord_types.components.component import Component
+from discord_types.interactions.responses.response_data.messages.message import Message
 
 
 class ChannelMessageWithSource(Message):

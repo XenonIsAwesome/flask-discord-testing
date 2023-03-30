@@ -1,8 +1,8 @@
 from discord_interactions import InteractionResponseFlags
-from discord_types.interactions.commands.command import Command
-from discord_types.responses.response_data.messages.message_types.channel_message_with_source import ChannelMessageWithSource
+from discord_types.interactions.requests.commands.command import Command
+from discord_types.interactions.responses.response_data.messages.message_types.channel_message_with_source import ChannelMessageWithSource
 from utils.discord_utils.decorators import discord_response
-from utils.discord_utils.discord_enums import ApplicationCommandTypes
+from utils.discord_utils.discord_enums import ApplicationCommandType
 
 
 class TestCommand(Command):
@@ -11,7 +11,7 @@ class TestCommand(Command):
 
     def __init__(self):
         super().__init__(
-            ApplicationCommandTypes.CHAT_INPUT,
+            ApplicationCommandType.CHAT_INPUT,
             TestCommand.name, TestCommand.description
         )
 

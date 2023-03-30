@@ -3,16 +3,16 @@ from typing import Union
 
 from discord_interactions import InteractionType
 
-from discord_types.responses.response_data.response_data import ResponseData
+from discord_types.interactions.requests.interaction_request import DiscordRequest
+from discord_types.interactions.responses.response_data.response_data import ResponseData
 from utils.discord_utils.decorators import discord_response
-from utils.discord_utils.discord_enums import ApplicationCommandTypes
-from discord_types.interactions.discord_interaction import DiscordInteraction
+from utils.discord_utils.discord_enums import ApplicationCommandType
 
 
-ApplicationCommands = Union[InteractionType, ApplicationCommandTypes]
+ApplicationCommands = Union[InteractionType, ApplicationCommandType]
 
 
-class Command(DiscordInteraction, ABC):
+class Command(DiscordRequest, ABC):
     def __init__(self, _type, name, description):
         super().__init__(InteractionType.APPLICATION_COMMAND)
 

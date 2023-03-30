@@ -1,12 +1,14 @@
 import json
 
-from utils.discord_utils.discord_enums import DiscordComponentTypes
+from utils.discord_utils.discord_enums import ComponentType
+
+Snowflake = str
 
 
 def parse_answers(custom_id, components: list) -> dict:
     values = {}
     for comp in components:
-        if comp['type'] == DiscordComponentTypes.ACTION_ROW:
+        if comp['type'] == ComponentType.ACTION_ROW:
             values.update(parse_answers(custom_id, comp['components']))
             continue
 

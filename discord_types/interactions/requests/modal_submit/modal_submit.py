@@ -2,14 +2,14 @@ from typing import List
 
 from discord_interactions import InteractionType
 
-from discord_types.interactions.components.component import Component
-from discord_types.interactions.components.component_factory import ComponentFactory
-from discord_types.interactions.components.component_types.action_row import ActionRow
-from discord_types.interactions.discord_interaction import DiscordInteraction
-from utils.discord_utils.discord_enums import DiscordComponentTypes
+from discord_types.components.component import Component
+from discord_types.components.component_factory import ComponentFactory
+from discord_types.components.component_types.action_row import ActionRow
+from discord_types.interactions.requests.interaction_request import DiscordRequest
+from utils.discord_utils.discord_enums import ComponentType
 
 
-class ModalSubmit(DiscordInteraction):
+class ModalSubmit(DiscordRequest):
     def __init__(self, custom_id: str, components: List[Component]):
         super().__init__(InteractionType.MODAL_SUBMIT)
 
@@ -19,8 +19,8 @@ class ModalSubmit(DiscordInteraction):
     def _parse_answers(self, components: list) -> dict:
         values = {}
         for comp in components:
-            if comp['type'] == DiscordComponentTypes.ACTION_ROW:
-                values.update(ModalSubmit._parse_answers(comp['components']))
+            if comp['type'] == ComponentType.ACTION_ROW:
+                values.update(self._parse_answers(comp['components']))
                 continue
 
             values[comp['custom_id'].replace(f'{self.custom_id}_', '')] = comp['value']
@@ -31,7 +31,7 @@ class ModalSubmit(DiscordInteraction):
     def _parse_components(components):
         parsed_components = []
         for comp in components:
-            if comp['type'] == DiscordComponentTypes.ACTION_ROW:
+            if comp['type'] == ComponentType.ACTION_ROW:
                 parsed_data = ActionRow(ModalSubmit._parse_components(comp['components']))
             else:
                 parsed_data = ComponentFactory(comp)

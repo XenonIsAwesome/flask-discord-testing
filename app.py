@@ -6,7 +6,8 @@ from discord_interactions import verify_key_decorator, InteractionType, Interact
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 
-from utils.discord_utils.command_utils import register_commands, remove_commands, get_commands, CommandFactory
+from bot.custom_commands.command_factory import CommandFactory
+from utils.discord_utils.command_utils import register_commands, remove_commands, get_commands
 from utils.discord_utils.general_utils import format_json_message, parse_answers
 
 load_dotenv()

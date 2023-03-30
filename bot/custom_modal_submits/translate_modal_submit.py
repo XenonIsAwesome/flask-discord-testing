@@ -1,7 +1,7 @@
 import json
 
-from discord_types.interactions.modal_submit.modal_submit import ModalSubmit
-from discord_types.responses.response_data.messages.message_types.channel_message_with_source import \
+from discord_types.interactions.requests.modal_submit.modal_submit import ModalSubmit
+from discord_types.interactions.responses.response_data.messages.message_types.channel_message_with_source import \
     ChannelMessageWithSource
 from utils.discord_utils.decorators import discord_response
 

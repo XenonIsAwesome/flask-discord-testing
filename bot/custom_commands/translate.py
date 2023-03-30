@@ -1,8 +1,8 @@
-from discord_types.interactions.commands.command import Command
+from discord_types.interactions.requests.commands.command import Command
 from bot.custom_modals.translate_request import TranslateRequest
-from discord_types.responses.response_data.response_data import ResponseData
+from discord_types.interactions.responses.response_data.response_data import ResponseData
 from utils.discord_utils.decorators import discord_response
-from utils.discord_utils.discord_enums import ApplicationCommandTypes
+from utils.discord_utils.discord_enums import ApplicationCommandType
 
 
 class TranslateCommand(Command):
@@ -11,7 +11,7 @@ class TranslateCommand(Command):
 
     def __init__(self):
         super().__init__(
-            ApplicationCommandTypes.MESSAGE,
+            ApplicationCommandType.MESSAGE,
             TranslateCommand.name, TranslateCommand.description
         )
 

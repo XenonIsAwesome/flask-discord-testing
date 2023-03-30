@@ -1,5 +1,6 @@
 from discord_interactions import InteractionResponseType
-from utils.serializeable import Serializable
+
+from utils.serializable import Serializable
 
 
 class ResponseData(Serializable):
