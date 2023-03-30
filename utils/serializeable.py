@@ -1,32 +1,28 @@
 class Serializable:
     @staticmethod
-    def __serialize(dir_data: dict):
-        for key, value in dir_data.items():
-            if '__' in key:
-                continue
+    def __serialize_data(data):
+        if type(data) is list:
+            return [Serializable.__serialize_data(x) for x in data]
 
-            if type(value) is list:
-                dir_data[key] = [
-                    Serializable.__serialize(x)
-                    if type(x) is Serializable else x
-                    for x in value
-                ]
-                continue
+        if type(data) is dict:
+            return {
+                k: Serializable.__serialize_data(v)
+                for k, v in data.items()
+            }
 
-            if type(value) is dict:
-                dir_data[key] = {
-                    k: Serializable.__serialize(v)
-                    if type(v) is Serializable else v
-                    for k, v in value.items()
-                }
-                continue
+        if hasattr(data, 'json') and 'method' in str(type(getattr(data, 'json'))):
+            return data.json()
 
-            if type(value) not in [int, str, float, bool]:
-                continue
+        if type(data) in [int, str, float, bool]:
+            return data
 
-            dir_data[key] = value
-
-        return dir_data
+        return None
 
     def json(self):
-        return self.__serialize({attr: getattr(self, attr) for attr in dir(self)})
+        json_data = {}
+        for k, v in self.__dict__.items():
+            if '_' in k:
+                continue
+            json_data[k] = Serializable.__serialize_data(v)
+
+        return json_data

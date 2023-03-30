@@ -3,7 +3,6 @@ from utils.discord_utils.discord_enums import ApplicationCommandTypes
 from discord_types.discord_interaction import DiscordInteraction
 
 
-# @dataclass
 class Command(DiscordInteraction):
     name: str
     description: str
