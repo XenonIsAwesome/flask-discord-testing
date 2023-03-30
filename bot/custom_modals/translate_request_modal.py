@@ -7,7 +7,7 @@ from discord_types.misc.emoji import Emoji
 from utils.discord_utils.discord_enums import TextInputStyle
 
 
-class TranslateRequest(Modal):
+class TranslateRequestModal(Modal):
     custom_id: str = 'translate_modal'
 
     def __init__(self, message_content):
@@ -36,7 +36,7 @@ class TranslateRequest(Modal):
                         label="French",
                         value="fr",
                         description="Français",
-                        emoji = Emoji(
+                        emoji=Emoji(
                             name="flag_fr",
                             _id="1089638579359195227"
                         )
@@ -58,7 +58,7 @@ class TranslateRequest(Modal):
         )
 
         super().__init__(
-            custom_id=TranslateRequest.custom_id,
+            custom_id=TranslateRequestModal.custom_id,
             title='Translate',
             components=[
                 self.__target_language,
