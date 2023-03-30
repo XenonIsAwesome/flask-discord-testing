@@ -6,9 +6,9 @@ from utils.discord_utils.discord_enums import TextInputStyles, SelectMenuTypes
 
 
 class TranslateRequest(Modal):
-    def __init__(self, message_content):
-        self.custom_id = 'translate_modal'
+    custom_id: str = 'translate_modal'
 
+    def __init__(self, message_content):
         self.__target_language: ActionRow = ActionRow([
             TextInput(
                 custom_id=f'{self.custom_id}_target_language',
@@ -21,6 +21,7 @@ class TranslateRequest(Modal):
             StringSelect(
                 custom_id=f'{self.custom_id}_lang_select',
 
+                # TODO: make SelectOption
                 options=[{
                     "label": "English",
                     "value": "en",
@@ -54,7 +55,7 @@ class TranslateRequest(Modal):
         )
 
         super().__init__(
-            custom_id=self.custom_id,
+            custom_id=TranslateRequest.custom_id,
             title='Translate',
             components=[
                 self.__target_language,

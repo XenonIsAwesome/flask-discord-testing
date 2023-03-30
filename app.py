@@ -1,12 +1,13 @@
-import json, os
+import json
+import os
 
 from discord_interactions import verify_key_decorator, InteractionType, InteractionResponseType, \
     InteractionResponseFlags
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 
-from utils.discord_utils.command_utils import register_command, remove_command, CommandFactory, get_command, \
-    parse_components, format_json_message
+from utils.discord_utils.command_utils import register_commands, remove_commands, get_commands, CommandFactory
+from utils.discord_utils.general_utils import format_json_message, parse_answers
 
 load_dotenv()
 app = Flask(__name__)
@@ -30,13 +31,10 @@ def interactions_router():
     # MODAL SUBMIT CASE
     if request.json['type'] == InteractionType.MODAL_SUBMIT:
         if request.json['data']['custom_id'] == 'translate_modal':
-            modal_id = f"{request.json['data']['custom_id']}_"
-
-            comp_values = {
-                k.replace(modal_id, ''): v
-                for k, v in parse_components(request.json['data']['components']).items()
-                if k.startswith(modal_id)
-            }
+            comp_values = parse_answers(
+                request.json['data']['custom_id'],
+                request.json['data']['components']
+            )
 
             return jsonify({
                 "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -54,28 +52,28 @@ def interactions_router():
     return jsonify({'type': InteractionResponseType.PONG})
 
 
-@app.route('/register/<string:name>')
-def register(name):
+@app.route('/register')
+def register_all():
     response = ""
-    for n, j in register_command(name).items():
+    for n, j in register_commands().items():
         response += f"<p>{n}: {json.dumps(j, indent=4)}</p><br/>"
 
     return response
 
 
-@app.route('/remove/<string:name>')
-def remove(name):
+@app.route('/remove')
+def remove_all():
     response = ""
-    for n, s in remove_command(name).items():
+    for n, s in remove_commands().items():
         response += f"<p>{n}: {s}</p><br/>"
 
     return response
 
 
-@app.route('/command/<string:name>')
-def command(name):
+@app.route('/commands')
+def commands():
     response = ""
-    for n, j in get_command(name).items():
+    for n, j in get_commands().items():
         response += f"<p>{n}: {json.dumps(j, indent=4)}</p><br/>"
 
     return response
