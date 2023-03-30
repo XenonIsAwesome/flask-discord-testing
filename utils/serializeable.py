@@ -18,11 +18,19 @@ class Serializable:
 
         return None
 
-    def json(self):
+    def json(self, keep_nulls: bool = False):
         json_data = {}
         for k, v in self.__dict__.items():
-            if '_' in k:
+            if not keep_nulls and v is None:
                 continue
-            json_data[k] = Serializable.__serialize_data(v)
+
+            if k.startswith('_') or k.endswith('_'):
+                continue
+
+            serialized_data = Serializable.__serialize_data(v)
+            if not keep_nulls and serialized_data is None:
+                continue
+
+            json_data[k] = serialized_data
 
         return json_data

@@ -2,9 +2,9 @@ import os
 from typing import Dict, Union, Optional
 import requests as requests
 
-from discord_types.commands.command import Command
-from discord_types.commands.test import TestCommand
-from discord_types.commands.translate import TranslateCommand
+from discord_types.interactions.commands.command import Command
+from bot.custom_commands.test import TestCommand
+from bot.custom_commands.translate import TranslateCommand
 
 CommandsDict = Dict[str, Command]
 

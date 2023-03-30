@@ -1,10 +1,14 @@
 import json
 import os
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 
 from discord_interactions import verify_key_decorator, InteractionType, InteractionResponseType
+
+from discord_types.responses.interaction_response import DiscordResponse
 from utils.discord_utils.command_utils import register_command, remove_command, CommandFactory, get_command
 
+load_dotenv()
 app = Flask(__name__)
 
 
@@ -16,11 +20,14 @@ def index():
 @app.route('/interactions', methods=['POST'])
 @verify_key_decorator(os.getenv('PUBLIC_KEY'))
 def interactions_router():
-    print(request.json)
+    print('request:', json.dumps(request.json, indent=4))
     # SLASH COMMAND CASE
     if request.json['type'] == InteractionType.APPLICATION_COMMAND:
         cmd = CommandFactory(request.json['data']['name'])
-        return jsonify(cmd.execute(request.json['data']))
+        discord_response = cmd.execute(request.json['data'])
+        print('response:', json.dumps(discord_response, indent=4))
+
+        return jsonify(discord_response)
 
     # MODAL SUBMIT CASE
     if request.json['type'] == InteractionType.MODAL_SUBMIT:
