@@ -1,4 +1,4 @@
-from typing import Union, List, Optional, Dict
+from typing import Union, List, Optional
 
 from discord_types.components.component import Component
 from discord_types.components.component_types.select_menu_types.select_option import SelectOption

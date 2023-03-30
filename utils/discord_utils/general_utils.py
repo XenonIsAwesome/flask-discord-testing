@@ -21,5 +21,5 @@ def format_code_message(language, code):
     return f"```{language}\n{code}\n```"
 
 
-def format_json_message(json_data: dict):
+def format_dict_message(json_data: dict):
     return format_code_message('json', json.dumps(json_data, indent=4))

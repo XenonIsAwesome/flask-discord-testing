@@ -7,50 +7,56 @@ from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 
 from bot.custom_commands.command_factory import CommandFactory
+from discord_types.interactions.responses.interaction_response import DiscordResponse
+from discord_types.interactions.responses.response_data.messages.message_types.channel_message_with_source import \
+    ChannelMessageWithSource
 from utils.discord_utils.command_utils import register_commands, remove_commands, get_commands
-from utils.discord_utils.general_utils import format_json_message, parse_answers
+from utils.discord_utils.general_utils import format_dict_message, parse_answers
 
 load_dotenv()
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return 'I\'m alive!'
-
-
 @app.route('/interactions', methods=['POST'])
 @verify_key_decorator(os.getenv('PUBLIC_KEY'))
 def interactions_router():
-    # SLASH COMMAND CASE
+    # IMPORTANT: SLASH COMMAND CASE
     if request.json['type'] == InteractionType.APPLICATION_COMMAND:
         cmd = CommandFactory(request.json['data']['name'])
         discord_response = cmd.execute(request.json['data'])
 
         return jsonify(discord_response)
 
-    # MODAL SUBMIT CASE
+    # TODO: MODAL SUBMIT CASE, add factory
     if request.json['type'] == InteractionType.MODAL_SUBMIT:
+        # IMPORTANT: Blank modal submit response example
+        # return jsonify({'type': InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE})
+
         if request.json['data']['custom_id'] == 'translate_modal':
-            comp_values = parse_answers(
-                request.json['data']['custom_id'],
-                request.json['data']['components']
-            )
+            pass
 
-            return jsonify({
-                "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-                "data": {
-                    "content": f"{format_json_message(comp_values)}\n{format_json_message(request.json['data'])}",
-                    "flags": InteractionResponseFlags.EPHEMERAL
-                }
-            })
+        # TODO: remove debug modal response
+        comp_values = parse_answers(
+            request.json['data']['custom_id'],
+            request.json['data']['components']
+        )
 
-    # MESSAGE COMPONENT CASE
+        return jsonify(DiscordResponse(ChannelMessageWithSource(
+            content="**Temporary modal submit response:**\n" + format_dict_message(comp_values),
+            flags=InteractionResponseFlags.EPHEMERAL
+        )).json())
+
+    # TODO: MESSAGE COMPONENT CASE, add factory
     if request.json['type'] == InteractionType.MESSAGE_COMPONENT:
         pass
 
-    # PONG CASE (default)
+    # IMPORTANT: PONG CASE (default)
     return jsonify({'type': InteractionResponseType.PONG})
+
+
+@app.route('/')
+def index():
+    return 'I\'m alive!'
 
 
 @app.route('/register')
