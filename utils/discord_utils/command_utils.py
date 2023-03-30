@@ -1,3 +1,4 @@
+import json
 import os
 from typing import Dict, Union, Optional
 import requests as requests
@@ -117,3 +118,23 @@ def get_command(name: str) -> Dict[str, Optional[dict]]:
         return responses
     elif type(cmd) is Command:
         return {name: get_one(cmd)}
+
+
+def parse_components(components: list) -> dict:
+    values = {}
+    for comp in components:
+        if comp['type'] == 1:
+            values.update(parse_components(comp['components']))
+            continue
+
+        values[comp['custom_id']] = comp['value']
+
+    return values
+
+
+def format_code_message(language, code):
+    return f"```{language}\n{code}\n```"
+
+
+def format_json_message(json_data: dict):
+    return format_code_message('json', json.dumps(json_data, indent=4))

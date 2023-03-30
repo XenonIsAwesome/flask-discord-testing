@@ -1,12 +1,12 @@
-import json
-import os
-from flask import Flask, request, jsonify
+import json, os
+
+from discord_interactions import verify_key_decorator, InteractionType, InteractionResponseType, \
+    InteractionResponseFlags
 from dotenv import load_dotenv
+from flask import Flask, request, jsonify
 
-from discord_interactions import verify_key_decorator, InteractionType, InteractionResponseType
-
-from discord_types.responses.interaction_response import DiscordResponse
-from utils.discord_utils.command_utils import register_command, remove_command, CommandFactory, get_command
+from utils.discord_utils.command_utils import register_command, remove_command, CommandFactory, get_command, \
+    parse_components, format_json_message
 
 load_dotenv()
 app = Flask(__name__)
@@ -20,18 +20,31 @@ def index():
 @app.route('/interactions', methods=['POST'])
 @verify_key_decorator(os.getenv('PUBLIC_KEY'))
 def interactions_router():
-    print('request:', json.dumps(request.json, indent=4))
     # SLASH COMMAND CASE
     if request.json['type'] == InteractionType.APPLICATION_COMMAND:
         cmd = CommandFactory(request.json['data']['name'])
         discord_response = cmd.execute(request.json['data'])
-        print('response:', json.dumps(discord_response, indent=4))
 
         return jsonify(discord_response)
 
     # MODAL SUBMIT CASE
     if request.json['type'] == InteractionType.MODAL_SUBMIT:
-        pass
+        if request.json['data']['custom_id'] == 'translate_modal':
+            modal_id = f"{request.json['data']['custom_id']}_"
+
+            comp_values = {
+                k.replace(modal_id, ''): v
+                for k, v in parse_components(request.json['data']['components']).items()
+                if k.startswith(modal_id)
+            }
+
+            return jsonify({
+                "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                "data": {
+                    "content": f"{format_json_message(comp_values)}\n{format_json_message(request.json['data'])}",
+                    "flags": InteractionResponseFlags.EPHEMERAL
+                }
+            })
 
     # MESSAGE COMPONENT CASE
     if request.json['type'] == InteractionType.MESSAGE_COMPONENT:

@@ -1,6 +1,6 @@
 from discord_interactions import InteractionResponseFlags
 from discord_types.interactions.commands.command import Command
-from discord_types.responses.response_data.messages.channel_message_with_source import ChannelMessageWithSource
+from discord_types.responses.response_data.messages.message_types.channel_message_with_source import ChannelMessageWithSource
 from utils.discord_utils.decorators import discord_response
 from utils.discord_utils.discord_enums import ApplicationCommandTypes
 
