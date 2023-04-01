@@ -1,5 +1,4 @@
 from discord_interactions import InteractionResponseType
-
 from utils.serializable import Serializable
 
 

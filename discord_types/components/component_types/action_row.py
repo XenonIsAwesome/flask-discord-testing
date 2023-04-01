@@ -1,7 +1,7 @@
 from typing import Optional, List
 
 from discord_types.components.component import Component
-from utils.discord_utils.discord_enums import ComponentType
+from utils.discord_utils.enums import ComponentType
 
 
 class ActionRow(Component):

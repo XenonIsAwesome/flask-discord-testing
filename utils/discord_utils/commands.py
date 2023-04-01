@@ -1,6 +1,5 @@
 import os
 from typing import Dict, Optional
-
 import requests as requests
 
 from bot.custom_commands.command_factory import CommandFactory

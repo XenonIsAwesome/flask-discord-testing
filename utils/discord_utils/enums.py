@@ -4,6 +4,12 @@ class ApplicationCommandType:
     MESSAGE = 3  # A UI-based command that shows up when you right-click or tap on a message
 
 
+class AllowedMentionType:
+    ROLE_MENTIONS = "roles"
+    USER_MENTIONS = "users"
+    EVERYONE_MENTIONS = "everyone"
+
+
 class ChannelType:
     GUILD_TEXT = 0  # a text channel within a server
     DM = 1  # a direct message between users
@@ -33,6 +39,17 @@ class ComponentType:
     ROLE_SELECT = 6  # Select menu for roles
     MENTIONABLE_SELECT = 7  # Select menu for mentionables (users and roles)
     CHANNEL_SELECT = 8  # Select menu for channels
+
+
+class MessageType:
+    CHANNEL_MESSAGE_WITH_SOURCE = 4  # respond to an interaction with a message
+    DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE = 5  # ACK an interaction and edit a response later,
+                                              # the user sees a loading state
+
+    DEFERRED_UPDATE_MESSAGE = 6  # for components, ACK an interaction and edit the original message later;
+                                 # the user does not see a loading state
+
+    UPDATE_MESSAGE = 7  # for components, edit the message the component was attached to
 
 
 class TextInputStyle:

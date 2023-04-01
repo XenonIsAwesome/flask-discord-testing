@@ -2,7 +2,7 @@ from discord_types.components.component_types.action_row import ActionRow
 from discord_types.components.component_types.select_menu_types.select_menu import SelectMenu
 from discord_types.components.component_types.select_menu_types.string_select import StringSelect
 from discord_types.components.component_types.text_input import TextInput
-from utils.discord_utils.discord_enums import ComponentType
+from utils.discord_utils.enums import ComponentType
 
 
 def ComponentFactory(component_data):

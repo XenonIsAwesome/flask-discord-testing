@@ -1,8 +1,6 @@
 import json
 
-from utils.discord_utils.discord_enums import ComponentType
-
-Snowflake = str
+from utils.discord_utils.enums import ComponentType
 
 
 def parse_answers(custom_id, components: list) -> dict:

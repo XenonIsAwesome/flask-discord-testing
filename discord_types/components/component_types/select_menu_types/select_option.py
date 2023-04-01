@@ -1,7 +1,7 @@
 from typing import Optional
 
 from discord_types.misc.emoji import Emoji
-from utils.serializable import Serializable
+from utils import Serializable
 
 
 class SelectOption(Serializable):

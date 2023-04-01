@@ -9,7 +9,7 @@ from discord_types.misc.embed import Embed
 from utils.discord_utils.enums import MessageType
 
 
-class ChannelMessageWithSource(Message):
+class DeferredChannelMessageWithSource(Message):
     def __init__(
         self, tts: Optional[bool] = None, content: Optional[str] = None,
         embeds: Optional[List[Embed]] = None, allowed_mentions: Optional[AllowedMentions] = None,
@@ -17,7 +17,7 @@ class ChannelMessageWithSource(Message):
         attachments: Optional[List[Attachment]] = None
     ):
         super().__init__(
-            MessageType.CHANNEL_MESSAGE_WITH_SOURCE,
+            MessageType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
 
             tts, content, embeds, allowed_mentions,
             flags, components, attachments

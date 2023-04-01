@@ -1,7 +1,7 @@
 from typing import Optional
 
 from discord_types.components.component import Component
-from utils.discord_utils.discord_enums import ComponentType, TextInputStyle
+from utils.discord_utils.enums import ComponentType, TextInputStyle
 
 
 class TextInput(Component):

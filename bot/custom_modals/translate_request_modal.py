@@ -4,7 +4,7 @@ from discord_types.components.component_types.select_menu_types.string_select im
 from discord_types.components.component_types.text_input import TextInput
 from discord_types.interactions.responses.response_data.modals.modal import Modal
 from discord_types.misc.emoji import Emoji
-from utils.discord_utils.discord_enums import TextInputStyle
+from utils.discord_utils.enums import TextInputStyle
 
 
 class TranslateRequestModal(Modal):

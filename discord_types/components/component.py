@@ -1,7 +1,7 @@
 from discord_interactions import InteractionType
 
 from discord_types.interactions.requests.interaction_request import DiscordRequest
-from utils.discord_utils.discord_enums import ComponentType
+from utils.discord_utils.enums import ComponentType
 
 
 class Component(DiscordRequest):

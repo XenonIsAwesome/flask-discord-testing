@@ -1,7 +1,7 @@
 from abc import ABC
 
 from discord_types.interactions.requests.commands.command import Command
-from utils.discord_utils.discord_enums import ApplicationCommandType
+from utils.discord_utils.enums import ApplicationCommandType
 
 
 class SlashCommand(Command, ABC):

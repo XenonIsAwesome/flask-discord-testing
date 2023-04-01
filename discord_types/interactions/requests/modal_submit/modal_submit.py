@@ -6,7 +6,7 @@ from discord_types.components.component import Component
 from discord_types.components.component_factory import ComponentFactory
 from discord_types.components.component_types.action_row import ActionRow
 from discord_types.interactions.requests.interaction_request import DiscordRequest
-from utils.discord_utils.discord_enums import ComponentType
+from utils.discord_utils.enums import ComponentType
 
 
 class ModalSubmit(DiscordRequest):

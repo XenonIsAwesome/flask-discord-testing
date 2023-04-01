@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from discord_types.components.component_types.select_menu_types.select_menu import SelectMenu
 from discord_types.components.component_types.select_menu_types.select_option import SelectOption
-from utils.discord_utils.discord_enums import SelectMenuType, ComponentType
+from utils.discord_utils.enums import SelectMenuType, ComponentType
 
 
 class StringSelect(SelectMenu):
